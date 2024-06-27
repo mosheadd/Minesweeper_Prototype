@@ -9,6 +9,9 @@ using namespace std;
 int main()
 {
 
+	mscp::Map testmap;
+
+	testmap.gameloop();
 
 	return 0;
 }

@@ -3,9 +3,9 @@
 using namespace mscp;
 using namespace std;
 
-int getNumberInRange(int min_val, int max_val){ return min_val + rand() % max_val; }
+int mscp::getNumberInRange(int min_val, int max_val){ return min_val + rand() % max_val; }
 
-void clearWindow()
+void mscp::clearWindow()
 {
 
 	COORD topLeft = { 0, 0 };
@@ -127,7 +127,7 @@ void Map::gameloop()
 
 	cin >> choose;
 
-	if (choose == 2) exit(0);
+	if (choose == 2) return;
 
 	cin >> row >> col;
 
@@ -220,7 +220,7 @@ void Map::gameloop()
 		}
 
 		if (exitGame)
-			break;
+			return;
 
 		clearWindow();
 
@@ -229,7 +229,7 @@ void Map::gameloop()
 		if (game_won)
 		{
 			cout << "you won\n";
-			break;
+			return;
 		}
 
 	}
