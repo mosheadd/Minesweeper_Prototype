@@ -220,7 +220,7 @@ void Map::gameloop()
 		}
 
 		if (exitGame)
-			return;
+			break;
 
 		clearWindow();
 
