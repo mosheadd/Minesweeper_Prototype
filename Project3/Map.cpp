@@ -261,7 +261,7 @@ bool Map::checkWinCondition()
 	{
 		for (auto j : i)
 		{
-			if (j == COVERED)
+			if (j == COVERED || j == FLAGGED)
 				return false;
 		}
 	}
