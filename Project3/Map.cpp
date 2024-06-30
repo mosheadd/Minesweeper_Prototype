@@ -110,8 +110,8 @@ short Map::getMinesCount(short row, short col)
 	{
 		short coeff1 = (row == 0) - (row == 9);
 		short coeff2 = (col == 0) - (col == 9);
-		mines_count += map[row + coeff1][col + coeff2] == MINE + map[row][col + coeff2] == MINE + map[row + coeff1][col] == MINE;
-		mines_count += map[row + coeff1][col + coeff2] == FLAGGED_MINE + map[row][col + coeff2] == FLAGGED_MINE + map[row + coeff1][col] == FLAGGED_MINE;
+		mines_count += (map[row + coeff1][col + coeff2] == MINE) + (map[row][col + coeff2] == MINE) + (map[row + coeff1][col] == MINE);
+		mines_count += (map[row + coeff1][col + coeff2] == FLAGGED_MINE) + (map[row][col + coeff2] == FLAGGED_MINE) + (map[row + coeff1][col] == FLAGGED_MINE);
 	}
 
 	return mines_count;
@@ -141,7 +141,7 @@ void Map::gameloop()
 			else
 			{
 				int rn = getNumberInRange(0, 100);
-				if (rn > 15) map[i].push_back(COVERED);
+				if (rn > 10) map[i].push_back(COVERED);
 				else map[i].push_back(MINE);
 			}
 		}
@@ -150,6 +150,7 @@ void Map::gameloop()
 	makeRoad(row - 1, col - 1);
 
 	clearWindow();
+	cout << getMinesCount(row - 1, col - 1) << endl;;
 
 	while (true)
 	{
