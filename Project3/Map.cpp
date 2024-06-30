@@ -29,12 +29,14 @@ Map::Map()
 {
 	height = 10;
 	width = 10;
+	init();
 }
 
 Map::Map(short height, short width)
 {
 	this->height = height;
 	this->width = width;
+	init();
 }
 
 Map::~Map()
@@ -120,9 +122,9 @@ short Map::getMinesCount(short row, short col)
 void Map::draw(bool uncovered)
 {
 
-	for (short i = 0; i < 10; i++)
+	for (short i = 0; i < height; i++)
 	{
-		for (short j = 0; j < 10; j++)
+		for (short j = 0; j < width; j++)
 		{
 
 			if (uncovered)
@@ -174,24 +176,22 @@ void Map::gameloop()
 	short choose, row, col;
 	bool exitGame = false;
 
+	draw();
+
 	cin >> choose;
 
 	if (choose == 2) return;
 
 	cin >> row >> col;
 
-	for (short i = 0; i < 10; i++)
+	for (short i = 0; i < height; i++)
 	{
-		map.push_back({});
-		for (short j = 0; j < 10; j++)
+		for (short j = 0; j < width; j++)
 		{
-			if (row == i + 1 && col == j + 1)
-				map[i].push_back(COVERED);
-			else
+			if (row != i + 1 || col != j + 1)
 			{
-				int rn = getNumberInRange(0, 100);
-				if (rn > 10) map[i].push_back(COVERED);
-				else map[i].push_back(MINE);
+				int rn = getNumberInRange(1, 100);
+				if (rn < 10) map[i][j] = MINE;
 			}
 		}
 	}
@@ -199,7 +199,6 @@ void Map::gameloop()
 	makeRoad(row - 1, col - 1);
 
 	clearWindow();
-	cout << getMinesCount(row - 1, col - 1) << endl;;
 
 	while (true)
 	{
@@ -288,3 +287,14 @@ bool Map::checkWinCondition()
 
 }
 
+void Map::init()
+{
+
+	for (short i = 0; i < height; i++)
+	{
+		map.push_back({});
+		for (short j = 0; j < width; j++)
+			map[i].push_back(COVERED);
+	}
+
+}

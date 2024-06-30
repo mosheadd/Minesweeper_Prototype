@@ -37,6 +37,7 @@ namespace mscp
 		void makeRoad(short row, short col);
 		void draw(bool uncovered = true);
 		void gameloop();
+		void init();
 
 		short getMinesCount(short row, short col);
 
