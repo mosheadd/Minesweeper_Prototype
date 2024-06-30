@@ -1,4 +1,5 @@
 #include "Map.h"
+#include "Winuser.h";
 
 using namespace mscp;
 using namespace std;
@@ -176,13 +177,30 @@ void Map::gameloop()
 	short choose, row, col;
 	bool exitGame = false;
 
-	draw();
+	while (true)
+	{
+		draw();
 
-	cin >> choose;
+		cin >> choose;
 
-	if (choose == 2) return;
+		if (choose == 2) return;
+		else if (choose == 1) break;
+		clearWindow();
+	}
 
-	cin >> row >> col;
+	while (true)
+	{
+		cin >> row >> col;
+
+		if (row<1 || row>height || col<1 || col>width)
+		{
+			MessageBox(NULL, L"Номера строки и столбца должны быть в пределах размера поля (начиная с 1).", L"Ошибка", MB_ICONERROR | MB_OK);
+			clearWindow();
+			draw();
+		}
+		else break;
+
+	}
 
 	for (short i = 0; i < height; i++)
 	{
