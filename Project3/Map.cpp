@@ -270,24 +270,6 @@ void Map::gameloop()
 
 	draw(false);
 
-	/*for (short i = 0; i < 10; i++)
-	{
-		for (short j = 0; j < 10; j++)
-		{
-			if (map[i][j] == MINE || map[i][j] == FLAGGED_MINE) cout << "+";
-			else
-			{
-				int bombs_count = getMinesCount(i, j);
-
-				if (bombs_count == 0)
-					cout << "-";
-				else
-					cout << bombs_count;
-			}
-		}
-		cout << endl;
-	}*/
-
 }
 
 bool Map::checkWinCondition()
