@@ -117,6 +117,55 @@ short Map::getMinesCount(short row, short col)
 	return mines_count;
 }
 
+void Map::draw(bool uncovered)
+{
+
+	for (short i = 0; i < 10; i++)
+	{
+		for (short j = 0; j < 10; j++)
+		{
+
+			if (uncovered)
+			{
+				int bombs_count;
+				switch (map[i][j])
+				{
+				case FLAGGED:
+					cout << "!";
+					break;
+				case FLAGGED_MINE:
+					cout << "!";
+					break;
+				case UNCOVERED:
+					bombs_count = getMinesCount(i, j);
+
+					if (bombs_count == 0)
+						cout << "-";
+					else
+						cout << bombs_count;
+					break;
+				default: cout << "*";
+				}
+			}
+			else
+			{
+				if (map[i][j] == MINE || map[i][j] == FLAGGED_MINE) cout << "+";
+				else
+				{
+					int bombs_count = getMinesCount(i, j);
+
+					if (bombs_count == 0)
+						cout << "-";
+					else
+						cout << bombs_count;
+				}
+			}
+		}
+		cout << endl;
+	}
+
+}
+
 void Map::gameloop()
 {
 
@@ -154,24 +203,8 @@ void Map::gameloop()
 
 	while (true)
 	{
-		for (short i = 0; i < 10; i++)
-		{
-			for (short j = 0; j < 10; j++)
-			{
-				if (map[i][j] == COVERED || map[i][j] == MINE) cout << "*";
-				else if (map[i][j] == FLAGGED || map[i][j] == FLAGGED_MINE) cout << "!";
-				else if (map[i][j] == UNCOVERED)
-				{
-					int bombs_count = getMinesCount(i, j);
 
-					if (bombs_count == 0)
-						cout << "-";
-					else
-						cout << bombs_count;
-				}
-			}
-			cout << endl;
-		}
+		draw();
 
 		cin >> choose;
 
@@ -235,7 +268,9 @@ void Map::gameloop()
 
 	}
 
-	for (short i = 0; i < 10; i++)
+	draw(false);
+
+	/*for (short i = 0; i < 10; i++)
 	{
 		for (short j = 0; j < 10; j++)
 		{
@@ -251,7 +286,7 @@ void Map::gameloop()
 			}
 		}
 		cout << endl;
-	}
+	}*/
 
 }
 
