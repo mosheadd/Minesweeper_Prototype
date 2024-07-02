@@ -4,7 +4,7 @@
 using namespace mscp;
 using namespace std;
 
-int mscp::getNumberInRange(int min_val, int max_val){ return min_val + rand() % max_val; }
+int mscp::getNumberInRange(int min_val, int max_val){ return min_val + ( rand() % (max_val - min_val + 1)); }
 
 void mscp::clearWindow()
 {
