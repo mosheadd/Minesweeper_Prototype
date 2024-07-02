@@ -236,7 +236,7 @@ void Map::gameloop()
 			if (map[row - 1][col - 1] == MINE || map[row - 1][col - 1] == FLAGGED_MINE)
 			{
 				clearWindow();
-				cout << "lol you died" << endl;
+				cout << "You lost" << endl;
 				exitGame = true;
 			}
 			else
