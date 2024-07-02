@@ -89,7 +89,7 @@ short Map::getMinesCount(short row, short col)
 		}
 		else
 		{
-			for (int t = 8; t < 10; t++)
+			for (int t = height - 2; t < height; t++)
 				for (int k = col - 1; k < col + 2; k++)
 					mines_count += map[t][k] == MINE || map[t][k] == FLAGGED_MINE;
 		}
@@ -105,7 +105,7 @@ short Map::getMinesCount(short row, short col)
 		else
 		{
 			for (int t = row - 1; t < row + 2; t++)
-				for (int k = 8; k < 10; k++)
+				for (int k = width - 2; k < width; k++)
 					mines_count += map[t][k] == MINE || map[t][k] == FLAGGED_MINE;
 		}
 	}
@@ -249,14 +249,14 @@ void Map::gameloop()
 
 			switch (map[row - 1][col - 1])
 			{
-			case UNCOVERED:
+			case COVERED:
 				map[row - 1][col - 1] = FLAGGED;
 				break;
 			case MINE:
 				map[row - 1][col - 1] = FLAGGED_MINE;
 				break;
 			case FLAGGED:
-				map[row - 1][col - 1] = UNCOVERED;
+				map[row - 1][col - 1] = COVERED;
 				break;
 			case FLAGGED_MINE:
 				map[row - 1][col - 1] = MINE;
